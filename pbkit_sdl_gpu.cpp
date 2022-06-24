@@ -74,8 +74,9 @@ static constexpr GPU_RendererEnum GPU_RENDERER_PBKIT = GPU_RENDERER_CUSTOM_0 + 1
 static GPU_RendererID renderer_id;
 
 struct PBKitSDLContext {
-  PBKitSDLContext(DWORD width, DWORD height) : width(width), height(height) {}
+  PBKitSDLContext(GPU_Target* target, DWORD width, DWORD height) : target(target), width(width), height(height) {}
 
+  GPU_Target* target;
   DWORD width;
   DWORD height;
 };
@@ -279,7 +280,7 @@ static GPU_Target* SDLCALL Init(GPU_Renderer* renderer,
   memset(target->context, 0, sizeof(GPU_Context));
   target->context->refcount = 1;
 
-  auto data = new PBKitSDLContext(pb_back_buffer_width(), pb_back_buffer_height());
+  auto data = new PBKitSDLContext(target, pb_back_buffer_width(), pb_back_buffer_height());
 
   target->context->data = data;
   target->context->context = nullptr;
@@ -746,6 +747,15 @@ static void SDLCALL FreeImage(GPU_Renderer* renderer, GPU_Image* image) {
 }
 
 static GPU_Target* SDLCALL GetTarget(GPU_Renderer* renderer, GPU_Image* image) {
+  if(!image)
+    return nullptr;
+
+  if(image->target)
+    return image->target;
+
+  if(!(renderer->enabled_features & GPU_FEATURE_RENDER_TARGETS))
+    return nullptr;
+
   PBKITSDLGPU_ASSERT(!"TODO: Implement me");
   return nullptr;
 }
