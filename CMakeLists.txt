@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(pbkit_sdl_gpu)
+project(pbkit_sdl_gpu VERSION 0.0.2)
 
 set(
         CMAKE_MODULE_PATH
@@ -97,4 +97,33 @@ target_compile_definitions(
         -DSDL_GPU_DISABLE_GLES
         -DSDL_GPU_DISABLE_OPENGL
         -DSDL_GPU_DISABLE_TEXTURE_GETS
+)
+
+
+install(
+        TARGETS
+        pbkit_sdl_gpu
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+install(
+        FILES
+        "color_combiner.h"
+        "pbkit_sdl_gpu.h"
+        "precalculated_vertex_shader.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_GLES_1.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_GLES_2.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_GLES_3.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_OpenGL_1.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_OpenGL_1_BASE.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_OpenGL_2.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_OpenGL_3.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_OpenGL_4.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_RendererImpl.h"
+        "${sdl_gpu_SOURCE_DIR}/include/SDL_gpu_version.h"
+        "${sdl_gpu_SOURCE_DIR}/src/externals/stb_image/stb_image.h"
+        "${sdl_gpu_SOURCE_DIR}/src/externals/stb_image_write/stb_image_write.h"
+        DESTINATION
+        pbkit_sdl_gpu
 )
