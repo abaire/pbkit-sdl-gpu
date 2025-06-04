@@ -24,6 +24,7 @@ else ()
     message(FATAL_ERROR "This project must be built with the nxdk toolchain")
 endif ()
 
+find_package(NXDK REQUIRED)
 find_package(NXDK_SDL2 REQUIRED)
 
 include(FetchContent)
@@ -73,7 +74,8 @@ target_include_directories(
 
 target_link_libraries(
         pbkit_sdl_gpu
-        PUBLIC
+        PRIVATE
+        NXDK::NXDK
         NXDK::SDL2
 )
 
