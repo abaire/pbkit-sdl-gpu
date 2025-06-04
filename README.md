@@ -4,7 +4,7 @@ pbkit_sdl_gpu
 Basic implementation of [sdl-gpu](https://github.com/grimfang4/sdl-gpu) for the original Microsoft Xbox.
 Uses pbkit from the [nxdk](https://github.com/XboxDev/nxdk).
 
-## Usage
+## Usage - Makefile
 
 In the top level `Makefile`:
 1. Set the `SDL_GPU_DIR` variable to the location of the sdl-gpu submodule. 

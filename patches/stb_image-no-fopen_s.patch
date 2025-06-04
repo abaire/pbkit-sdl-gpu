@@ -1,0 +1,6 @@
+--- a/src/externals/stb_image/stb_image.h
++++ b/src/externals/stb_image/stb_image.h
+1212,1214d1211
+< #elif defined(_MSC_VER) && _MSC_VER >= 1400
+<     if (0 != fopen_s(&f, filename, mode))
+<         f = 0;
